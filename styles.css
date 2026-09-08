@@ -56,6 +56,220 @@ body {
   background-attachment: fixed;
 }
 
+/* ==========================================================================
+   BARRA DE NAVEGACIÓN SUPERIOR (NAVBAR / ÍNDICE STICKY)
+   ========================================================================== */
+.navbar-index {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  background: rgba(9, 13, 22, 0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.8rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: #ffffff;
+}
+
+.brand-icon {
+  font-size: 1.4rem;
+}
+
+.brand-text {
+  background: linear-gradient(135deg, var(--cyan-neon), var(--magenta-neon));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 0.5px;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-link {
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.nav-link:hover {
+  color: var(--cyan-neon);
+  background: rgba(0, 242, 254, 0.1);
+  border-color: rgba(0, 242, 254, 0.3);
+}
+
+.nav-link.active {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--border-color);
+}
+
+.nav-mobile-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.nav-mobile-toggle span {
+  width: 24px;
+  height: 2px;
+  background: #ffffff;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+
+/* ==========================================================================
+   FOOTER COMPLETO DEL SITIO
+   ========================================================================== */
+.site-footer {
+  margin-top: 3rem;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(20px);
+  border: 1.5px solid var(--border-color);
+  border-top: 4px solid var(--magenta-neon);
+  border-radius: 28px;
+  padding: 3rem 2.5rem 1.5rem 2.5rem;
+  box-shadow: var(--shadow-card);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.footer-col h4 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 1.2rem;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 0.8rem;
+}
+
+.footer-col p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.2rem;
+}
+
+.footer-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.footer-tag {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--cyan-neon);
+  background: rgba(0, 242, 254, 0.1);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 242, 254, 0.25);
+}
+
+.footer-nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.footer-nav-list a {
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 0.93rem;
+  font-weight: 500;
+  transition: all 0.25s ease;
+}
+
+.footer-nav-list a:hover {
+  color: var(--cyan-neon);
+  padding-left: 6px;
+}
+
+.fuentes-list-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.fuentes-list-footer a {
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 0.6rem 0.9rem;
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  transition: all 0.25s ease;
+}
+
+.fuentes-list-footer a:hover {
+  border-color: var(--magenta-neon);
+  background: rgba(236, 72, 153, 0.15);
+  color: #ffffff;
+  transform: translateX(4px);
+}
+
+.footer-bottom-bar {
+  border-top: 1px solid var(--border-color);
+  padding-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #64748b;
+  font-size: 0.85rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
 .wireframe-container {
   max-width: 1140px;
   margin: 0 auto;

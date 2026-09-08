@@ -2,14 +2,32 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   /* ==========================================================================
-     1. GESTIÓN DE NAVEGACIÓN Y SCROLL
+     1. GESTIÓN DE NAVEGACIÓN, ÍNDICE Y SCROLL
      ========================================================================== */
   const scrollToNucleosBtn = document.getElementById('scrollToNucleos');
   const nucleosSection = document.getElementById('nucleosSection');
+  const navNucleo1 = document.getElementById('navNucleo1');
+  const navNucleo2 = document.getElementById('navNucleo2');
+  const footNucleo1 = document.getElementById('footNucleo1');
+  const footNucleo2 = document.getElementById('footNucleo2');
+  const footTestCall = document.getElementById('footTestCall');
 
   if (scrollToNucleosBtn && nucleosSection) {
     scrollToNucleosBtn.addEventListener('click', () => {
       nucleosSection.scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+
+  // Enlaces directos a Modales desde el Índice / Navbar / Footer
+  if (navNucleo1) navNucleo1.addEventListener('click', () => openModal(modalNucleo1));
+  if (navNucleo2) navNucleo2.addEventListener('click', () => openModal(modalNucleo2));
+  if (footNucleo1) footNucleo1.addEventListener('click', () => openModal(modalNucleo1));
+  if (footNucleo2) footNucleo2.addEventListener('click', () => openModal(modalNucleo2));
+  if (footTestCall) {
+    footTestCall.addEventListener('click', () => {
+      openModal(modalNucleo1);
+      const testSec = document.getElementById('testCallSection');
+      if (testSec) testSec.scrollIntoView({ behavior: 'smooth' });
     });
   }
 

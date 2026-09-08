@@ -15,10 +15,35 @@
 
 <body>
 
+  <!-- BARRA DE NAVEGACIÓN SUPERIOR (NÁVBAR / ÍNDICE DE SECCIONES) -->
+  <nav class="navbar-index" id="navbarIndex">
+    <div class="nav-container">
+      <a href="#heroScreen" class="nav-brand">
+        <span class="brand-icon">🎙️</span>
+        <span class="brand-text">VOZ & IA</span>
+      </a>
+
+
+      <div class="nav-menu" id="navMenu">
+        <a href="#heroScreen" class="nav-link active">🏠 Inicio</a>
+        <a href="javascript:void(0)" class="nav-link" id="navNucleo1">⚖️ Núcleo 1: Identidad & Test</a>
+        <a href="#middleFeatureSection" class="nav-link">🔊 Muestra Clonada</a>
+        <a href="javascript:void(0)" class="nav-link" id="navNucleo2">🧪 Núcleo 2: Simulador Estafas</a>
+        <a href="#fuentesSection" class="nav-link">📚 Fuentes</a>
+      </div>
+
+      <button class="nav-mobile-toggle" id="navMobileToggle" aria-label="Abrir menú de índice">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
   <div class="wireframe-container">
 
     <!-- PRIMERA PANTALLA: HERO & INTRODUCCIÓN FULL VIEWPORT (100VH) -->
-    <header class="hero-screen">
+    <header class="hero-screen" id="heroScreen">
       <div class="hero-content">
         <div class="block-badge main-title-badge">
           GENERACIÓN DE VOZ CON IA
@@ -31,10 +56,13 @@
         <div class="intro-grid">
           <div class="intro-text-box">
             <p>
-              La voz humana es una de nuestras señas de identidad más íntimas: define quiénes somos, transmite emociones y
-              genera confianza inmediata. Sin embargo, los avances en inteligencia artificial generativa han transformado
+              La voz humana es una de nuestras señas de identidad más íntimas: define quiénes somos, transmite emociones
+              y
+              genera confianza inmediata. Sin embargo, los avances en inteligencia artificial generativa han
+              transformado
               el sonido de nuestra voz en un dato biométrico reproducible a partir de fragmentos de pocos segundos. Esta
-              facilidad técnica abre una encrucijada crítica entre el derecho inalienable a la propia voz y su apropiación
+              facilidad técnica abre una encrucijada crítica entre el derecho inalienable a la propia voz y su
+              apropiación
               ilegítima para manipular la verdad y cometer fraudes digitales.
             </p>
           </div>
@@ -96,7 +124,7 @@
 
 
         <!-- MODULO INTERMEDIO: MUESTRA CLONADA, MANIPULACIÓN Y SUPLANTACIÓN (ENTRE NÚCLEO 1 Y NÚCLEO 2) -->
-        <div class="middle-feature-box">
+        <div class="middle-feature-box" id="middleFeatureSection">
           <div class="middle-feature-header">
             <div class="phone-status-badge"
               style="background: rgba(0, 242, 254, 0.12); color: var(--cyan-neon); border-color: rgba(0, 242, 254, 0.3);">
@@ -161,7 +189,8 @@
                 <p>
                   <strong style="font-size: 1.05rem; color: #f8fafc; display: block; margin-bottom: 4px;">Pérdida del
                     valor probatorio del sonido:</strong>
-                  La grabación de voz deja de constituir una prueba fehaciente de la presencia o veracidad de una persona.
+                  La grabación de voz deja de constituir una prueba fehaciente de la presencia o veracidad de una
+                  persona.
                 </p>
               </div>
             </div>
@@ -196,30 +225,61 @@
 
 
 
-    <!-- FOOTER: FUENTES DE INFORMACIÓN -->
-    <footer class="fuentes-box">
-      <div class="block-badge sub"
-        style="background: rgba(225, 29, 72, 0.15); color: #fb7185; border-left-color: #f43f5e;">
-        Fuentes de Información
+    <!-- FOOTER GENERAL COMPLETO Y FUENTES -->
+    <footer class="site-footer" id="fuentesSection">
+      <div class="footer-grid">
+
+        <!-- COLUMNA 1: INFO PROYECTO -->
+        <div class="footer-col brand-col">
+          <div class="footer-logo">
+            <span class="footer-icon">🎙️</span>
+            <strong>GENERACIÓN DE VOZ CON IA</strong>
+          </div>
+          <p>Investigación sobre apropiación de la voz, extracción no autorizada de biometría sonora e ingeniería social
+            en estafas virtuales.</p>
+          <div class="footer-tags">
+            <span class="footer-tag">IA Generativa</span>
+            <span class="footer-tag">Biometría</span>
+            <span class="footer-tag">Seguridad Digital</span>
+          </div>
+        </div>
+
+        <!-- COLUMNA 2: ÍNDICE DE NAVEGACIÓN RÁPIDA -->
+        <div class="footer-col index-col">
+          <h4>📌 Índice de Contenidos</h4>
+          <ul class="footer-nav-list">
+            <li><a href="#heroScreen">🏠 Inicio e Introducción</a></li>
+            <li><a href="javascript:void(0)" id="footNucleo1">⚖️ Núcleo 1: Derecho sobre tu voz</a></li>
+            <li><a href="javascript:void(0)" id="footTestCall">📞 Test: Llamada de prueba (IA vs Humana)</a></li>
+            <li><a href="#middleFeatureSection">🔊 Muestra Clonada & Clonación rápida</a></li>
+            <li><a href="javascript:void(0)" id="footNucleo2">🧪 Núcleo 2: Armá tu propia estafa</a></li>
+          </ul>
+        </div>
+
+        <!-- COLUMNA 3: FUENTES Y MARCO LEGAL -->
+        <div class="footer-col sources-col">
+          <h4>📚 Fuentes y Marco Legal</h4>
+          <div class="fuentes-list-footer">
+            <a href="https://consumer.ftc.gov/consumer-alerts/2023/03/scammers-use-ai-enhance-their-family-emergency-schemes"
+              target="_blank">🔗 FTC - Emergency AI Schemes</a>
+            <a href="https://www.argentina.gob.ar/aaip/datospersonales" target="_blank">🔗 AAIP Argentina - Datos
+              Personales</a>
+            <a href="https://www.argentina.gob.ar/propiedadintelectual" target="_blank">🔗 Propiedad Intelectual &
+              IA</a>
+            <a href="https://www.retellai.com/es/blog/are-ai-generated-voices-legal" target="_blank">🔗 Retell AI -
+              Marco
+              Legal de Voces</a>
+            <a href="https://www.voices.com/es/blog/is-it-legal-to-use-ai-voices" target="_blank">🔗 Voices.com -
+              Legalidad
+              de Voces IA</a>
+          </div>
+        </div>
+
       </div>
 
-      <div class="fuentes-list">
-        <a href="https://consumer.ftc.gov/consumer-alerts/2023/03/scammers-use-ai-enhance-their-family-emergency-schemes"
-          target="_blank" class="fuente-item">
-          🔗 Scammers use AI to enhance family emergency schemes | FTC
-        </a>
-        <a href="https://www.argentina.gob.ar/aaip/datospersonales" target="_blank" class="fuente-item">
-          🔗 PROTECCION DE LOS DATOS (AAIP Argentina)
-        </a>
-        <a href="https://www.argentina.gob.ar/propiedadintelectual" target="_blank" class="fuente-item">
-          🔗 Uso de Voces Sin Consentimiento en la IA
-        </a>
-        <a href="https://www.retellai.com/es/blog/are-ai-generated-voices-legal" target="_blank" class="fuente-item">
-          🔗 Llamadas telefónicas con IA: Retell AI
-        </a>
-        <a href="https://www.voices.com/es/blog/is-it-legal-to-use-ai-voices" target="_blank" class="fuente-item">
-          🔗 ¿Es legal usar voces de IA? – Voices.com
-        </a>
+      <div class="footer-bottom-bar">
+        <span>© 2026 Infografía Interactiva - Protección de la Identidad e Inteligencia Artificial</span>
+        <span>Desarrollado para concientización sobre fraudes de voz sintética</span>
       </div>
     </footer>
 
@@ -285,7 +345,7 @@
 
 
         <!-- INTERACCIÓN EXCLUSIVA: LLAMADA DE PRUEBA (RECONOCER A LA IA) -->
-        <div class="test-call-wrapper">
+        <div class="test-call-wrapper" id="testCallSection">
           <div class="test-call-header">
             <div class="phone-status-badge">📞 SIMULADOR DE DETECCIÓN ACÚSTICA</div>
             <h3>Llamada de Prueba: Reconocimiento de IA vs Voz Humana</h3>
@@ -568,6 +628,9 @@
                 </div>
               </div>
             </div>
+
+          </div>
+        </div>
 
       </div>
     </div>
