@@ -1,9 +1,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ==========================================================================
-     1. GESTIÓN DE NAVEGACIÓN, ÍNDICE Y SCROLL
-     ========================================================================== */
+
   const scrollToNucleosBtn = document.getElementById('scrollToNucleos');
   const nucleosSection = document.getElementById('nucleosSection');
   const navNucleo1 = document.getElementById('navNucleo1');
@@ -18,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Enlaces directos a Modales desde el Índice / Navbar / Footer
+
   if (navNucleo1) navNucleo1.addEventListener('click', () => openModal(modalNucleo1));
   if (navNucleo2) navNucleo2.addEventListener('click', () => openModal(modalNucleo2));
   if (footNucleo1) footNucleo1.addEventListener('click', () => openModal(modalNucleo1));
@@ -31,9 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ==========================================================================
-     2. GESTIÓN DE VENTANAS MODALES
-     ========================================================================== */
+
   const openNucleo1Btn = document.getElementById('openNucleo1Btn');
   const openNucleo2Btn = document.getElementById('openNucleo2Btn');
   const modalNucleo1 = document.getElementById('modalNucleo1');

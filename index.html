@@ -45,12 +45,24 @@
     <!-- PRIMERA PANTALLA: HERO & INTRODUCCIÓN FULL VIEWPORT (100VH) -->
     <header class="hero-screen" id="heroScreen">
       <div class="hero-content">
-        <div class="block-badge main-title-badge">
-          GENERACIÓN DE VOZ CON IA
-        </div>
+        <div class="hero-header-block">
+          <h1 class="hero-title">
+            Generación de Voz <span class="hero-title-red">con IA</span>
+          </h1>
 
-        <div class="block-badge subtitle-badge">
-          Apropiación de la voz e identidad en estafas virtuales con IA
+          <p class="hero-subtitle">
+            Apropiación de la voz e identidad en <strong class="subtitle-highlight red-scam">estafas virtuales con IA</strong>
+          </p>
+
+          <div class="hero-waveform-indicator">
+            <span class="wave-bar bar-1"></span>
+            <span class="wave-bar bar-2"></span>
+            <span class="wave-bar bar-3"></span>
+            <span class="wave-bar bar-4"></span>
+            <span class="wave-bar bar-5"></span>
+            <span class="wave-bar bar-6"></span>
+            <span class="wave-bar bar-7"></span>
+          </div>
         </div>
 
         <div class="intro-grid">
@@ -93,10 +105,11 @@
     <!-- SECCIÓN DE LANZADORES DE NÚCLEOS Y MUESTRA CLONADA -->
     <section class="nucleos-launchpad" id="nucleosSection">
       <div class="launchpad-header">
-        <span class="launchpad-tag">Módulos Interactivos & Experimentos</span>
+        <span class="launchpad-tag">
+          <span class="status-dot"></span> Módulos Interactivos &amp; Experimentos
+        </span>
         <h2>Seleccioná un Núcleo para Explorar</h2>
-        <p>Hacé clic en cualquiera de los núcleos para abrir su apartado especial e interactuar con los experimentos y
-          análisis.</p>
+        <p>Hacé clic en cualquiera de los núcleos para abrir su apartado especial e interactuar con los experimentos de clonación y análisis de estafas.</p>
       </div>
 
       <div class="launchpad-flow">
@@ -123,79 +136,108 @@
         </div>
 
 
-        <!-- MODULO INTERMEDIO: MUESTRA CLONADA, MANIPULACIÓN Y SUPLANTACIÓN (ENTRE NÚCLEO 1 Y NÚCLEO 2) -->
+        <!-- MODULO INTERMEDIO: MUESTRA CLONADA, MANIPULACIÓN Y SUPLANTACIÓN -->
         <div class="middle-feature-box" id="middleFeatureSection">
           <div class="middle-feature-header">
-            <div class="phone-status-badge"
-              style="background: rgba(0, 242, 254, 0.12); color: var(--cyan-neon); border-color: rgba(0, 242, 254, 0.3);">
-              🔊 MUESTRA CLONADA E INGENIERÍA SOCIAL</div>
+            <div class="muestra-clonada-badge">
+              MUESTRA CLONADA E INGENIERÍA SOCIAL
+            </div>
             <h3>Manipulación y Suplantación de Alta Fidelidad</h3>
-            <p>Experimentá con una muestra de audio clonado extraído de notas de voz públicas y descubrí la velocidad de
-              copia acústica.</p>
+            <p>Experimentá con una muestra de audio clonado extraído de notas de voz públicas<br>y descubrí la velocidad de copia acústica.</p>
           </div>
 
-          <div class="two-col-grid" style="align-items: center;">
+          <div class="two-col-grid" style="align-items: start;">
 
-            <div class="audio-card-box">
+            <div class="audio-card-box cyan-border-card">
               <div class="audio-controls-row">
-                <button id="playAudioBtn" class="btn-play-simple" aria-label="Escuchar voz">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                <button id="playAudioBtn" class="btn-play-cyan" aria-label="Escuchar voz">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M8 5v14l11-7z" />
                   </svg>
                 </button>
                 <div>
-                  <strong style="display: block; font-size: 1rem; color: #f8fafc;">Escuchar Muestra Clonada</strong>
-                  <span style="font-size: 0.85rem; color: #94a3b8;">Audio extraído de nota de voz pública</span>
+                  <strong style="display: block; font-size: 0.98rem; color: #ffffff;">Escuchar Muestra Clonada</strong>
+                  <span style="font-size: 0.82rem; color: #94a3b8;">Audio extraído de nota de voz pública</span>
                 </div>
               </div>
 
-              <div class="quiz-box">
-                <label for="timeSlider">¿Cuántos segundos creés que se necesitan para copiar esta voz?</label>
+              <div class="quiz-box-inner">
+                <label for="timeSlider" class="quiz-label">¿Cuántos segundos creés que se necesitan para copiar esta voz?</label>
                 <div class="slider-row">
-                  <input type="range" id="timeSlider" min="1" max="60" value="15">
-                  <span id="selectedTimeDisplay" class="slider-val">15s</span>
+                  <div class="step-slider-track-container">
+                    <div class="step-dots-bg">
+                      <span class="step-dot large-dot"></span>
+                      <span class="step-dot"></span>
+                      <span class="step-dot"></span>
+                      <span class="step-dot"></span>
+                      <span class="step-dot"></span>
+                      <span class="step-dot"></span>
+                      <span class="step-dot large-dot"></span>
+                    </div>
+                    <input type="range" id="timeSlider" min="1" max="60" value="15">
+                  </div>
+                  <span id="selectedTimeDisplay" class="slider-val-cyan">15s</span>
                 </div>
-                <button id="submitGuessBtn" class="btn-reveal">REVELAR TIEMPO Y PROCESO</button>
+                <div style="text-align: left;">
+                  <button id="submitGuessBtn" class="btn-reveal-purple">Revelar Tiempo Y Proceso</button>
+                </div>
 
                 <div id="revealInfoBox" class="reveal-info-box">
-                  <strong style="color: #38bdf8; display: block; margin-bottom: 6px; font-size: 1.05rem;">¡Resultado
-                    Real!</strong>
+                  <strong style="color: #38bdf8; display: block; margin-bottom: 6px; font-size: 1.05rem;">¡Resultado Real!</strong>
                   <p style="font-size: 0.95rem; color: #e2e8f0; line-height: 1.6;">
-                    Se necesitan solo <strong>3 a 5 segundos</strong> de audio limpio para clonar un timbre vocal con
-                    modelos de última generación.
+                    Se necesitan solo <strong>3 a 5 segundos</strong> de audio limpio para clonar un timbre vocal con modelos de última generación.
                   </p>
                 </div>
               </div>
             </div>
 
             <div class="right-estafas-col">
-              <div class="image-card cyan-card" style="margin-bottom: 1.2rem;">
+              <div class="image-card cyan-card" style="margin-bottom: 1.4rem;">
                 <div class="img-wrapper">
                   <img src="ia3.jpg" alt="Estafas de Voz e Ingeniería Social con IA" class="interactive-img">
                 </div>
                 <div class="caption-content">
                   <div class="caption-title">Manipulación y Suplantación</div>
-                  <div class="caption-subtitle">Llamadas Extorsivas y Fraudes Corporativos</div>
+                  <div class="caption-subtitle cyan-subtitle-text">Llamadas Extorsivas y Fraudes Corporativos</div>
                 </div>
               </div>
 
-              <div class="text-block-box emerald-accent">
-                <p style="margin-bottom: 1rem;">
-                  <strong style="font-size: 1.05rem; color: #f8fafc; display: block; margin-bottom: 4px;">Ingeniería
-                    social y suplantación:</strong>
-                  Utilización de audio sintético para ejecutar llamadas extorsivas que anulan la capacidad de respuesta
-                  racional.
-                </p>
-                <p>
-                  <strong style="font-size: 1.05rem; color: #f8fafc; display: block; margin-bottom: 4px;">Pérdida del
-                    valor probatorio del sonido:</strong>
-                  La grabación de voz deja de constituir una prueba fehaciente de la presencia o veracidad de una
-                  persona.
-                </p>
+              <div class="text-block-box emerald-border-card">
+                <div style="margin-bottom: 1rem;">
+                  <strong style="font-size: 0.98rem; color: #ffffff; display: block; margin-bottom: 4px;">Ingeniería social y suplantación:</strong>
+                  <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.6; margin: 0;">
+                    Utilización de audio sintético para ejecutar llamadas extorsivas que anulan la capacidad de respuesta racional.
+                  </p>
+                </div>
+                <div>
+                  <strong style="font-size: 0.98rem; color: #ffffff; display: block; margin-bottom: 4px;">Pérdida del valor probatorio del sonido:</strong>
+                  <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.6; margin: 0;">
+                    La grabación de voz deja de constituir una prueba fehaciente de la presencia o veracidad de una persona.
+                  </p>
+                </div>
               </div>
             </div>
 
           </div>
+
+          <!-- ROBOT GRAPHIC AT THE BOTTOM CENTER -->
+          <div class="robot-graphic-container">
+            <svg class="robot-icon-svg" width="160" height="140" viewBox="0 0 160 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="robotGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#e11d48" />
+                  <stop offset="50%" stop-color="#a855f7" />
+                  <stop offset="100%" stop-color="#38bdf8" />
+                </linearGradient>
+              </defs>
+              <rect x="25" y="10" width="110" height="58" rx="29" fill="none" stroke="url(#robotGrad)" stroke-width="12" />
+              <circle cx="58" cy="39" r="7" fill="url(#robotGrad)" />
+              <circle cx="102" cy="39" r="7" fill="url(#robotGrad)" />
+              <rect x="25" y="80" width="110" height="44" rx="14" fill="none" stroke="url(#robotGrad)" stroke-width="12" />
+              <rect x="48" y="95" width="64" height="14" rx="4" fill="none" stroke="url(#robotGrad)" stroke-width="5" />
+            </svg>
+          </div>
+
         </div>
 
 
@@ -293,9 +335,12 @@
       <button class="modal-close" aria-label="Cerrar modal">&times;</button>
 
       <div class="modal-header">
-        <div class="block-badge nucleo1-header-badge">NÚCLEO 1</div>
+        <div class="modal-category-tag magenta-tag">
+          <span class="tag-badge">NÚCLEO 01</span>
+          <span class="tag-label">Identidad, Biometría Vocal &amp; Derechos</span>
+        </div>
         <h2>Derecho sobre tu voz: ¿Tu voz o mi voz?</h2>
-        <p class="modal-subhead">Identidad, consentimiento bioético y experimento interactivo de audición.</p>
+        <p class="modal-subhead">Identidad, consentimiento bioético y la prevención de apropiación en fraudes sonoros.</p>
       </div>
 
       <div class="modal-body">
@@ -345,10 +390,12 @@
         <!-- INTERACCIÓN EXCLUSIVA: LLAMADA DE PRUEBA (RECONOCER A LA IA) -->
         <div class="test-call-wrapper" id="testCallSection">
           <div class="test-call-header">
-            <div class="phone-status-badge">📞 SIMULADOR DE DETECCIÓN ACÚSTICA</div>
+            <div class="section-tag-pill alert-purple">
+              <span class="status-dot"></span> 📞 SIMULADOR DE DETECCIÓN ACÚSTICA
+            </div>
             <h3>Llamada de Prueba: Reconocimiento de IA vs Voz Humana</h3>
             <p>Escuchá atentamente cada muestra de audio telefónico y marcá si corresponde a una <strong>Voz Generada
-                por IA</strong> o una <strong>Voz Humana Real</strong>.</p>
+                por IA</strong> o una <strong>Voz Humana Real</strong> en situaciones de engaño.</p>
           </div>
 
           <!-- MUESTRAS DE AUDIO PARA EL TEST -->
@@ -496,9 +543,12 @@
       <button class="modal-close" aria-label="Cerrar modal">&times;</button>
 
       <div class="modal-header">
-        <div class="block-badge nucleo2-header-badge">NÚCLEO 2</div>
+        <div class="modal-category-tag red-tag">
+          <span class="tag-badge red-badge">NÚCLEO 02</span>
+          <span class="tag-label">Análisis de Estafas &amp; Suplantación</span>
+        </div>
         <h2>Estafas de voz con IA: ¿A quién le creemos?</h2>
-        <p class="modal-subhead">Ingeniería social, clonación en segundos y suplantación de identidad.</p>
+        <p class="modal-subhead">Ingeniería social, clonación en segundos y suplantación de identidad en llamadas extorsivas.</p>
       </div>
 
       <div class="modal-body">
@@ -506,12 +556,12 @@
         <!-- HERRAMIENTA INTERACTIVA: ARMÁ TU PROPIA ESTAFA -->
         <div class="scam-builder-wrapper">
           <div class="scam-builder-header">
-            <div class="phone-status-badge"
-              style="background: rgba(225, 29, 72, 0.15); color: #fb7185; border-color: rgba(244, 63, 94, 0.4);">🧪
-              SIMULADOR DE CLONACIÓN Y PERSUASIÓN</div>
+            <div class="section-tag-pill alert-rose">
+              <span class="status-dot pulse-red"></span> 🧪 SIMULADOR DE CLONACIÓN Y PERSUASIÓN
+            </div>
             <h3>Armá tu propia "estafa" con IA</h3>
             <p>Seleccioná distintos filtros y características vocales (tono, emoción, intensidad, acento y velocidad)
-              para generar una voz sintética y evaluar los porcentajes de engaño que produce.</p>
+              para generar una voz sintética y evaluar los porcentajes de engaño que produce en llamadas trampa.</p>
           </div>
 
           <div class="scam-controls-grid">
