@@ -382,7 +382,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. EMOCIÓN / VELOCIDAD -> Iconito DENTRO de la nube de pensamiento derecha
     if (rightBubbleIcon) {
       if (scamParams.emocion === 'lento') {
-        rightBubbleIcon.innerHTML = `<img src="imgs/dormir.png" alt="Tranquilo">`;
+        rightBubbleIcon.innerHTML = `<img src="imgs/manejo-del-estres (1).png" alt="Tranquilo">`;
       } else if (scamParams.emocion === 'normal') {
         rightBubbleIcon.innerHTML = `<img src="imgs/neutral.png" alt="Normal">`;
       } else if (scamParams.emocion === 'rapido') {
@@ -419,7 +419,6 @@ document.addEventListener('DOMContentLoaded', () => {
           const speedValLabel = document.getElementById('speedValLabel');
           let targetSpeed = 1.0;
           if (scamParams.emocion === 'lento') targetSpeed = 0.7;
-          else if (scamParams.emocion === 'normal') targetSpeed = 1.0;
           else if (scamParams.emocion === 'rapido') targetSpeed = 1.4;
 
           scamParams.velocidad = targetSpeed;
