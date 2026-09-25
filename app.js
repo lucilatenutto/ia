@@ -89,6 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
      ========================================================================== */
   let currentAudioInstance = null;
   let currentActivePlayBtn = null;
+  let isPlayingScamCall = false;
 
   function stopAllAudio() {
     if (currentAudioInstance) {
@@ -99,6 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
     }
+    isPlayingScamCall = false;
     resetPlayBtnState();
   }
 
@@ -111,6 +113,16 @@ document.addEventListener('DOMContentLoaded', () => {
       if (pauseIcon) pauseIcon.style.display = 'none';
       if (textSpan) textSpan.textContent = 'Reproducir Audio';
     });
+
+    const btnPlayScam = document.getElementById('btnPlayScamAudio');
+    if (btnPlayScam) {
+      const playIcon = btnPlayScam.querySelector('.play-icon');
+      const pauseIcon = btnPlayScam.querySelector('.pause-icon');
+      const span = btnPlayScam.querySelector('span');
+      if (playIcon) playIcon.style.display = 'inline';
+      if (pauseIcon) pauseIcon.style.display = 'none';
+      if (span) span.textContent = 'Escuchar Llamada Creada';
+    }
   }
 
   const playSampleBtns = document.querySelectorAll('.btn-play-sample');
@@ -334,12 +346,52 @@ document.addEventListener('DOMContentLoaded', () => {
      6. HERRAMIENTA INTERACTIVA: "ARMÁ TU PROPIA ESTAFA" (NÚCLEO 2)
      ========================================================================== */
   const scamParams = {
-    tono: 'neutro',
-    emocion: 'urgencia',
-    intensidad: 'normal',
-    acento: 'rioplatense',
+    genero: 'ninguno',
+    emocion: 'ninguno',
+    nacionalidad: 'ninguno',
     velocidad: 1.0
   };
+
+  function updateHackerAvatarVisuals() {
+    const imgHackerMain = document.getElementById('imgHackerMain');
+    const leftBubbleIcon = document.getElementById('leftBubbleIcon');
+    const rightBubbleIcon = document.getElementById('rightBubbleIcon');
+
+    if (!imgHackerMain) return;
+
+    // 1. GÉNERO -> Cambiar el avatar del muñeco hacker
+    if (scamParams.genero === 'masculino') {
+      imgHackerMain.src = 'imgs/hacker2.png';
+    } else if (scamParams.genero === 'femenino') {
+      imgHackerMain.src = 'imgs/hacker3.png';
+    } else {
+      imgHackerMain.src = 'imgs/hacker1.png';
+    }
+
+    // 2. NACIONALIDAD -> Iconito DENTRO de la burbuja de diálogo izquierda
+    if (leftBubbleIcon) {
+      if (scamParams.nacionalidad === 'argentina') {
+        leftBubbleIcon.innerHTML = `<img src="imgs/argentina.png" alt="Argentina">`;
+      } else if (scamParams.nacionalidad === 'espana') {
+        leftBubbleIcon.innerHTML = `<img src="imgs/espana.png" alt="España">`;
+      } else {
+        leftBubbleIcon.innerHTML = `<span class="symbol-text">¿</span>`;
+      }
+    }
+
+    // 3. EMOCIÓN / VELOCIDAD -> Iconito DENTRO de la nube de pensamiento derecha
+    if (rightBubbleIcon) {
+      if (scamParams.emocion === 'lento') {
+        rightBubbleIcon.innerHTML = `<img src="imgs/dormir.png" alt="Tranquilo">`;
+      } else if (scamParams.emocion === 'normal') {
+        rightBubbleIcon.innerHTML = `<img src="imgs/neutral.png" alt="Normal">`;
+      } else if (scamParams.emocion === 'rapido') {
+        rightBubbleIcon.innerHTML = `<img src="imgs/ataque-de-panico1.png" alt="Pánico">`;
+      } else {
+        rightBubbleIcon.innerHTML = `<span class="symbol-text">?</span>`;
+      }
+    }
+  }
 
   // Manejador de selección de botones de parámetros
   document.querySelectorAll('.param-options').forEach(group => {
@@ -350,21 +402,85 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.addEventListener('click', () => {
         btns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        scamParams[paramName] = btn.getAttribute('data-val');
+        const val = btn.getAttribute('data-val');
+        scamParams[paramName] = val;
+
+        // Si se cambia el botón de emoción, sincronizar slider de velocidad
+        if (paramName === 'emocion') {
+          const scamSpeedRange = document.getElementById('scamSpeedRange');
+          const speedValLabel = document.getElementById('speedValLabel');
+          let targetSpeed = 1.0;
+          if (val === 'lento') targetSpeed = 0.7;
+          else if (val === 'normal') targetSpeed = 1.0;
+          else if (val === 'rapido') targetSpeed = 1.4;
+
+          scamParams.velocidad = targetSpeed;
+          if (scamSpeedRange) scamSpeedRange.value = targetSpeed;
+          if (speedValLabel) {
+            const labelText = targetSpeed < 0.9 ? 'Lenta' : targetSpeed > 1.1 ? 'Rápida' : 'Normal';
+            speedValLabel.textContent = `${targetSpeed.toFixed(1)}x (${labelText})`;
+          }
+          if (currentAudioInstance) {
+            currentAudioInstance.playbackRate = targetSpeed;
+          }
+        }
+
+        updateHackerAvatarVisuals();
       });
     });
   });
 
-  // Manejador del slider de velocidad
+  // Manejador del slider de velocidad en tiempo real con aceleración de audio
   const scamSpeedRange = document.getElementById('scamSpeedRange');
   const speedValLabel = document.getElementById('speedValLabel');
 
   if (scamSpeedRange && speedValLabel) {
     scamSpeedRange.addEventListener('input', (e) => {
       const val = parseFloat(e.target.value).toFixed(1);
-      scamParams.velocidad = parseFloat(val);
-      speedValLabel.textContent = `${val}x (${val < 1 ? 'Lenta' : val > 1 ? 'Rápida' : 'Normal'})`;
+      const numVal = parseFloat(val);
+      scamParams.velocidad = numVal;
+
+      let speedText = 'Normal';
+      if (numVal < 0.9) speedText = 'Lenta';
+      else if (numVal > 1.1) speedText = 'Rápida';
+
+      speedValLabel.textContent = `${val}x (${speedText})`;
+
+      // Acelerar o desacelerar el audio en reproducción en tiempo real
+      if (currentAudioInstance) {
+        currentAudioInstance.playbackRate = numVal;
+      }
+      updateHackerAvatarVisuals();
     });
+  }
+
+  // Obtener la ruta del archivo MP3 de acuerdo a las opciones seleccionadas (audiosnucleodos)
+  function getScamAudioPath(params) {
+    const nac = (params.nacionalidad === 'espana') ? 'esp' : 'arg';
+    const em = (params.emocion === 'lento') ? 'lenta' : (params.emocion === 'rapido') ? 'rapido' : 'normal';
+    const gen = (params.genero === 'femenino') ? 'm' : 'h';
+
+    if (nac === 'arg') {
+      if (gen === 'h') {
+        if (em === 'lenta') return 'audiosnucleodos/arglentah.mp3';
+        if (em === 'rapido') return 'audiosnucleodos/argrapidoh.mp3';
+        return 'audiosnucleodos/argrnormalh.mp3';
+      } else {
+        if (em === 'lenta') return 'audiosnucleodos/arglentam.mp3';
+        if (em === 'rapido') return 'audiosnucleodos/argrapidom.mp3';
+        return 'audiosnucleodos/argnormalm.mp3';
+      }
+    } else {
+      if (gen === 'h') {
+        if (em === 'lenta') return 'audiosnucleodos/esplentah.mp3';
+        if (em === 'rapido') return 'audiosnucleodos/esprapidoh.mp3';
+        return 'audiosnucleodos/espnormalh.mp3';
+      } else {
+        if (em === 'lenta') return 'audiosnucleodos/esplentam.mp3';
+        if (em === 'rapido') return 'audiosnucleodos/esprapidom.mp3';
+        return 'audiosnucleodos/espnormalm.mp3';
+      }
+    }
   }
 
   // Generación de audio y cálculo de gráfico de torta
@@ -373,13 +489,40 @@ document.addEventListener('DOMContentLoaded', () => {
   const scamAudioText = document.getElementById('scamAudioText');
   const btnPlayScamAudio = document.getElementById('btnPlayScamAudio');
 
-  let isPlayingScamCall = false;
-
   const scriptTexts = {
-    urgencia: "¡Hola! Estoy secuestrado en un auto en la ruta, necesitás transferir dinero inmediatamente a este alias si no querés que pase lo peor.",
-    confianza: "Hola, te contacto del departamento de seguridad bancaria. Detectamos un acceso sospechoso y necesitamos validar tu clave de coordenadas.",
-    desesperacion: "¡Por favor ayudame! Me acaban de asaltar en la calle, no tengo mi teléfono y necesito que le mandes efectivo a la persona que va a tu casa."
+    lento: "Hola... Te hablo con tranquilidad para contarte sobre esta situación...",
+    normal: "¡Hola! Te contacto porque tuvimos un inconveniente y necesitamos resolverlo ahora.",
+    rapido: "¡Por favor escuchame! ¡Estoy desesperado, tuve una emergencia urgente en la calle y necesito tu ayuda ya!"
   };
+
+  function triggerScamAudioPlayback() {
+    const playIcon = btnPlayScamAudio ? btnPlayScamAudio.querySelector('.play-icon') : null;
+    const pauseIcon = btnPlayScamAudio ? btnPlayScamAudio.querySelector('.pause-icon') : null;
+    const span = btnPlayScamAudio ? btnPlayScamAudio.querySelector('span') : null;
+
+    stopAllAudio();
+    const audioPath = getScamAudioPath(scamParams);
+    currentAudioInstance = new Audio(audioPath);
+    if (scamParams.velocidad) {
+      currentAudioInstance.playbackRate = scamParams.velocidad;
+    }
+
+    currentAudioInstance.play().then(() => {
+      isPlayingScamCall = true;
+      if (playIcon) playIcon.style.display = 'none';
+      if (pauseIcon) pauseIcon.style.display = 'inline';
+      if (span) span.textContent = 'Pausar Reproducción';
+    }).catch(err => {
+      console.error('Error al reproducir audio:', err);
+    });
+
+    currentAudioInstance.onended = () => {
+      isPlayingScamCall = false;
+      if (playIcon) playIcon.style.display = 'inline';
+      if (pauseIcon) pauseIcon.style.display = 'none';
+      if (span) span.textContent = 'Escuchar Llamada Creada';
+    };
+  }
 
   if (btnGenerateScam && scamResultsPanel) {
     btnGenerateScam.addEventListener('click', () => {
@@ -388,156 +531,67 @@ document.addEventListener('DOMContentLoaded', () => {
       scamResultsPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
       // Actualizar texto según emoción
-      const text = scriptTexts[scamParams.emocion] || scriptTexts.urgencia;
+      const text = scriptTexts[scamParams.emocion] || scriptTexts.normal;
       if (scamAudioText) scamAudioText.textContent = `"${text}"`;
 
-      // Calcular métricas según combinación de parámetros
-      const metrics = calculateScamMetrics(scamParams);
-      renderDonutChart(metrics);
+      // Calcular porcentaje de personas que caerían en la estafa según los filtros
+      updateScamFallPercentage();
+
+      // Reproducir audio automáticamente al generar
+      triggerScamAudioPlayback();
     });
   }
 
-  // Reproducción de audio sintetizado configurado
+  // Reproducción de audio real MP3 desde audiosnucleodos al hacer clic en el botón de reproducción
   if (btnPlayScamAudio) {
     btnPlayScamAudio.addEventListener('click', () => {
-      if (!('speechSynthesis' in window)) {
-        alert('Tu navegador no soporta reproducción de voz sintetizada.');
-        return;
-      }
-
       const playIcon = btnPlayScamAudio.querySelector('.play-icon');
       const pauseIcon = btnPlayScamAudio.querySelector('.pause-icon');
       const span = btnPlayScamAudio.querySelector('span');
 
       if (isPlayingScamCall) {
-        window.speechSynthesis.cancel();
+        stopAllAudio();
         isPlayingScamCall = false;
         if (playIcon) playIcon.style.display = 'inline';
         if (pauseIcon) pauseIcon.style.display = 'none';
         if (span) span.textContent = 'Escuchar Llamada Creada';
       } else {
-        stopAllAudio();
-        const text = scriptTexts[scamParams.emocion] || scriptTexts.urgencia;
-        const utterance = new SpeechSynthesisUtterance(text);
-
-        utterance.lang = 'es-AR';
-        utterance.rate = scamParams.velocidad;
-
-        if (scamParams.tono === 'grave') utterance.pitch = 0.6;
-        else if (scamParams.tono === 'agudo') utterance.pitch = 1.4;
-        else utterance.pitch = 1.0;
-
-        utterance.onend = () => {
-          isPlayingScamCall = false;
-          if (playIcon) playIcon.style.display = 'inline';
-          if (pauseIcon) pauseIcon.style.display = 'none';
-          if (span) span.textContent = 'Escuchar Llamada Creada';
-        };
-
-        window.speechSynthesis.speak(utterance);
-        isPlayingScamCall = true;
-        if (playIcon) playIcon.style.display = 'none';
-        if (pauseIcon) pauseIcon.style.display = 'inline';
-        if (span) span.textContent = 'Pausar Reproducción';
+        triggerScamAudioPlayback();
       }
     });
   }
 
-  // Cálculo de métricas
-  function calculateScamMetrics(params) {
-    let credibilidad = 70;
-    let panico = 65;
-    let engaño = 75;
+  // Cálculo del porcentaje de personas que podrían caer en la estafa según los filtros
+  function updateScamFallPercentage() {
+    let pct = 65; // Porcentaje base de vulnerabilidad auditiva
 
-    if (params.acento === 'rioplatense') { credibilidad += 15; engaño += 10; }
-    if (params.emocion === 'urgencia') { panico += 25; engaño += 8; }
-    if (params.emocion === 'desesperacion') { panico += 20; credibilidad += 5; }
-    if (params.intensidad === 'gritado') { panico += 15; }
-    if (params.intensidad === 'susurro') { credibilidad += 8; }
-    if (params.velocidad > 1.1) { panico += 10; }
+    // 1. Género
+    if (scamParams.genero === 'femenino') pct += 6;
+    else if (scamParams.genero === 'masculino') pct += 4;
 
-    credibilidad = Math.min(96, Math.max(40, credibilidad));
-    panico = Math.min(98, Math.max(35, panico));
-    engaño = Math.min(95, Math.max(45, engaño));
+    // 2. Emoción
+    if (scamParams.emocion === 'rapido') pct += 18; // Alto pánico / emergencia en la ruta
+    else if (scamParams.emocion === 'normal') pct += 10;
+    else if (scamParams.emocion === 'lento') pct += 4;
 
-    return [
-      { name: 'Credibilidad Acústica', pct: credibilidad, color: '#00f2fe', desc: 'Nivel de confianza biológica proyectada por el timbre y acento.' },
-      { name: 'Índice de Pánico Inducido', pct: panico, color: '#ff007f', desc: 'Grado de anulación del pensamiento racional por la urgencia auditiva.' },
-      { name: 'Tasa de Engaño Exitoso', pct: engaño, color: '#a855f7', desc: 'Porcentaje estimado de víctimas que realizarían la transferencia sin dudar.' }
-    ];
-  }
+    // 3. Nacionalidad / Acento
+    if (scamParams.nacionalidad === 'argentina') pct += 12; // Acento local cercano genera mayor confianza
+    else if (scamParams.nacionalidad === 'espana') pct += 8;
 
-  // Renderizado del Gráfico de Dona SVG con Tooltip en Hover
-  function renderDonutChart(dataItems) {
-    const svg = document.getElementById('scamDonutSvg');
-    const legend = document.getElementById('pieLegend');
-    const donutCenterPct = document.getElementById('donutCenterPct');
-    const tooltip = document.getElementById('pieTooltip');
-
-    if (!svg || !legend) return;
-
-    svg.innerHTML = '';
-    legend.innerHTML = '';
-
-    const avg = Math.round(dataItems.reduce((acc, curr) => acc + curr.pct, 0) / dataItems.length);
-    if (donutCenterPct) donutCenterPct.textContent = `${avg}%`;
-
-    const radius = 38;
-    const circumference = 2 * Math.PI * radius;
-    let accumulatedAngle = 0;
-
-    dataItems.forEach((item) => {
-      const slicePct = item.pct / 100;
-      const strokeDasharray = `${circumference * slicePct * 0.85} ${circumference}`;
-      const strokeDashoffset = -accumulatedAngle;
-      accumulatedAngle += circumference * slicePct * 0.85 + (circumference * 0.05);
-
-      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      circle.setAttribute('cx', '50');
-      circle.setAttribute('cy', '50');
-      circle.setAttribute('r', radius);
-      circle.setAttribute('stroke', item.color);
-      circle.setAttribute('stroke-dasharray', strokeDasharray);
-      circle.setAttribute('stroke-dashoffset', strokeDashoffset);
-      circle.classList.add('donut-segment');
-
-      // HOVER EVENTS PARA REVELAR EL PORCENTAJE EN EL TOOLTIP
-      circle.addEventListener('mouseenter', () => showTooltip(item));
-      circle.addEventListener('mousemove', () => showTooltip(item));
-      circle.addEventListener('mouseleave', () => {
-        if (tooltip) tooltip.classList.remove('active');
-      });
-
-      svg.appendChild(circle);
-
-      // Crear leyenda
-      const legendItem = document.createElement('div');
-      legendItem.className = 'legend-item';
-      legendItem.innerHTML = `
-        <div class="legend-color-dot" style="background: ${item.color};"></div>
-        <div class="legend-text">
-          <strong>${item.name}</strong>
-          <small>${item.desc}</small>
-        </div>
-        <span class="legend-pct" style="color:${item.color}">${item.pct}%</span>
-      `;
-
-      legendItem.addEventListener('mouseenter', () => showTooltip(item));
-      legendItem.addEventListener('mouseleave', () => {
-        if (tooltip) tooltip.classList.remove('active');
-      });
-
-      legend.appendChild(legendItem);
-    });
-
-    function showTooltip(item) {
-      if (!tooltip) return;
-      document.getElementById('tooltipTitle').textContent = item.name;
-      document.getElementById('tooltipPct').textContent = `${item.pct}%`;
-      document.getElementById('tooltipPct').style.color = item.color;
-      document.getElementById('tooltipDesc').textContent = item.desc;
-      tooltip.classList.add('active');
+    // 4. Velocidad de habla
+    if (scamParams.velocidad > 1.0) {
+      pct += Math.round((scamParams.velocidad - 1.0) * 14);
+    } else if (scamParams.velocidad < 1.0) {
+      pct -= Math.round((1.0 - scamParams.velocidad) * 8);
     }
+
+    pct = Math.min(97, Math.max(42, pct));
+
+    const donutCenterPct = document.getElementById('donutCenterPct');
+    if (donutCenterPct) {
+      donutCenterPct.textContent = `${pct}%`;
+    }
+    return pct;
   }
 
 });
