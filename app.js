@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Cerrar modal al hacer clic fuera del contenido
+
   document.querySelectorAll('.modal-backdrop').forEach(backdrop => {
     backdrop.addEventListener('click', (e) => {
       if (e.target === backdrop) {
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Cerrar modal con tecla Escape
+
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       const activeModal = document.querySelector('.modal-backdrop.active');
@@ -84,9 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  /* ==========================================================================
-     3. CONTROLADOR DE REPRODUCCIÓN DE AUDIO (MP3 Y SINTETIZADOR)
-     ========================================================================== */
+
   let currentAudioInstance = null;
   let currentActivePlayBtn = null;
   let isPlayingScamCall = false;
@@ -136,13 +134,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const pauseIcon = btn.querySelector('.pause-icon');
       const textSpan = btn.querySelector('span');
 
-      // Si ya se está reproduciendo este mismo botón, pausar
+
       if (currentActivePlayBtn === btn) {
         stopAllAudio();
         return;
       }
 
-      // Detener cualquier otro audio en reproducción
+
       stopAllAudio();
       currentActivePlayBtn = btn;
 
@@ -178,9 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  /* ==========================================================================
-     4. LÓGICA DEL TEST: "LLAMADA DE PRUEBA (RECONOCER A LA IA)"
-     ========================================================================== */
+
   const correctAnswers = {
     '1': 'ia',
     '2': 'ia',
@@ -215,10 +211,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (!card || !feedbackBox) return;
 
-      // Registrar respuesta
+
       userAnswers[sampleNum] = userChoice;
 
-      // Marcar botones activos
+
       const sisterBtns = card.querySelectorAll('.btn-choice');
       sisterBtns.forEach(b => {
         b.classList.remove('selected-ia', 'selected-humana');
@@ -230,7 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.classList.add('selected-humana');
       }
 
-      // Evaluar acierto
+
       const isCorrect = userChoice === correctAnswers[sampleNum];
       card.classList.remove('correct-answer', 'wrong-answer');
       feedbackBox.classList.remove('feedback-correct', 'feedback-wrong');
@@ -246,7 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
       feedbackBox.textContent = explanations[sampleNum][userChoice];
       feedbackBox.classList.add('show-feedback');
 
-      // Verificar si se completaron las 3 muestras
+
       checkTestCompletion();
     });
   });
@@ -279,9 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  /* ==========================================================================
-     5. SIMULADOR NÚCLEO 2 (SLIDER & REVELAR TIEMPO)
-     ========================================================================== */
+
   const playBtn = document.getElementById('playAudioBtn');
   const timeSlider = document.getElementById('timeSlider');
   const selectedTimeDisplay = document.getElementById('selectedTimeDisplay');
@@ -342,9 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  /* ==========================================================================
-     6. HERRAMIENTA INTERACTIVA: "ARMÁ TU PROPIA ESTAFA" (NÚCLEO 2)
-     ========================================================================== */
+
   const scamParams = {
     genero: 'ninguno',
     emocion: 'ninguno',
@@ -359,16 +351,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!imgHackerMain) return;
 
-    // 1. GÉNERO -> Cambiar el avatar del muñeco hacker
+
     if (scamParams.genero === 'masculino') {
-      imgHackerMain.src = 'imgs/hacker2.png'; // Azul (Masculino)
+      imgHackerMain.src = 'imgs/hacker2.png';
     } else if (scamParams.genero === 'femenino') {
-      imgHackerMain.src = 'imgs/hacker1.png'; // Violeta (Femenino)
+      imgHackerMain.src = 'imgs/hacker1.png';
     } else {
-      imgHackerMain.src = 'imgs/hacker3.png'; // Gris (Estado Inicial)
+      imgHackerMain.src = 'imgs/hacker3.png';
     }
 
-    // 2. NACIONALIDAD -> Iconito DENTRO de la burbuja de diálogo izquierda
+
     if (leftBubbleIcon) {
       if (scamParams.nacionalidad === 'argentina') {
         leftBubbleIcon.innerHTML = `<img src="imgs/argentina.png" alt="Argentina">`;
@@ -379,7 +371,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // 3. EMOCIÓN / VELOCIDAD -> Iconito DENTRO de la nube de pensamiento derecha
+
     if (rightBubbleIcon) {
       if (scamParams.emocion === 'lento') {
         rightBubbleIcon.innerHTML = `<img src="imgs/manejo-del-estres (1).png" alt="Tranquilo">`;
@@ -393,7 +385,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Manejador de selección de botones de parámetros (con opción de deseleccionar)
+
   document.querySelectorAll('.param-options').forEach(group => {
     const paramName = group.getAttribute('data-param');
     const btns = group.querySelectorAll('.param-btn');
@@ -406,14 +398,14 @@ document.addEventListener('DOMContentLoaded', () => {
         btns.forEach(b => b.classList.remove('active'));
 
         if (isAlreadyActive) {
-          // Deseleccionar al hacer clic de nuevo (vuelve a estado neutral 'ninguno')
+
           scamParams[paramName] = 'ninguno';
         } else {
           btn.classList.add('active');
           scamParams[paramName] = val;
         }
 
-        // Si se cambia el botón de emoción, sincronizar slider de velocidad
+
         if (paramName === 'emocion') {
           const scamSpeedRange = document.getElementById('scamSpeedRange');
           const speedValLabel = document.getElementById('speedValLabel');
@@ -438,10 +430,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Inicializar estado visual del hacker al cargar la página
+
   updateHackerAvatarVisuals();
 
-  // Manejador del slider de velocidad en tiempo real con aceleración de audio
+
   const scamSpeedRange = document.getElementById('scamSpeedRange');
   const speedValLabel = document.getElementById('speedValLabel');
 
@@ -457,7 +449,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       speedValLabel.textContent = `${val}x (${speedText})`;
 
-      // Acelerar o desacelerar el audio en reproducción en tiempo real
+
       if (currentAudioInstance) {
         currentAudioInstance.playbackRate = numVal;
       }
@@ -465,7 +457,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Obtener la ruta del archivo MP3 de acuerdo a las opciones seleccionadas (audiosnucleodos)
+
   function getScamAudioPath(params) {
     const nac = (params.nacionalidad === 'espana') ? 'esp' : 'arg';
     const em = (params.emocion === 'lento') ? 'lenta' : (params.emocion === 'rapido') ? 'rapido' : 'normal';
@@ -494,7 +486,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Generación de audio y cálculo de gráfico de torta
+
   const btnGenerateScam = document.getElementById('btnGenerateScam');
   const scamResultsPanel = document.getElementById('scamResultsPanel');
   const scamAudioText = document.getElementById('scamAudioText');
@@ -537,23 +529,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (btnGenerateScam && scamResultsPanel) {
     btnGenerateScam.addEventListener('click', () => {
-      // Mostrar panel de resultados
+
       scamResultsPanel.style.display = 'block';
       scamResultsPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-      // Actualizar texto según emoción
+
       const text = scriptTexts[scamParams.emocion] || scriptTexts.normal;
       if (scamAudioText) scamAudioText.textContent = `"${text}"`;
 
-      // Calcular porcentaje de personas que caerían en la estafa según los filtros
+
       updateScamFallPercentage();
 
-      // Reproducir audio automáticamente al generar
+
       triggerScamAudioPlayback();
     });
   }
 
-  // Reproducción de audio real MP3 desde audiosnucleodos al hacer clic en el botón de reproducción
+
   if (btnPlayScamAudio) {
     btnPlayScamAudio.addEventListener('click', () => {
       const playIcon = btnPlayScamAudio.querySelector('.play-icon');
@@ -572,24 +564,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Cálculo del porcentaje de personas que podrían caer en la estafa según los filtros
-  function updateScamFallPercentage() {
-    let pct = 65; // Porcentaje base de vulnerabilidad auditiva
 
-    // 1. Género
+  function updateScamFallPercentage() {
+    let pct = 65;
+
+
     if (scamParams.genero === 'femenino') pct += 6;
     else if (scamParams.genero === 'masculino') pct += 4;
 
-    // 2. Emoción
-    if (scamParams.emocion === 'rapido') pct += 18; // Alto pánico / emergencia en la ruta
+
+    if (scamParams.emocion === 'rapido') pct += 18;
     else if (scamParams.emocion === 'normal') pct += 10;
     else if (scamParams.emocion === 'lento') pct += 4;
 
-    // 3. Nacionalidad / Acento
-    if (scamParams.nacionalidad === 'argentina') pct += 12; // Acento local cercano genera mayor confianza
+
+    if (scamParams.nacionalidad === 'argentina') pct += 12;
     else if (scamParams.nacionalidad === 'espana') pct += 8;
 
-    // 4. Velocidad de habla
+
     if (scamParams.velocidad > 1.0) {
       pct += Math.round((scamParams.velocidad - 1.0) * 14);
     } else if (scamParams.velocidad < 1.0) {

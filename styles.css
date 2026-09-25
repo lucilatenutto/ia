@@ -4,7 +4,7 @@
   --bg-dark: #0a0f1d;
   --bg-card: rgba(15, 23, 42, 0.7);
   --bg-card-hover: rgba(30, 41, 59, 0.8);
-  
+
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
   --text-dim: #64748b;
@@ -385,7 +385,7 @@ body {
   font-weight: 800;
 }
 
-/* Tags de Categoría de Modales y Secciones */
+
 .modal-category-tag {
   display: inline-flex;
   align-items: center;
@@ -415,7 +415,7 @@ body {
   color: #94a3b8;
 }
 
-/* Section Tag Pills */
+
 .section-tag-pill {
   display: inline-flex;
   align-items: center;
@@ -466,11 +466,20 @@ body {
 }
 
 @keyframes pulseDot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.8); }
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(0.8);
+  }
 }
 
-/* Grid de Introducción */
+
 .intro-grid {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
@@ -497,7 +506,7 @@ body {
   font-weight: 400;
 }
 
-/* Indicador de Desplazamiento (Scroll Down) */
+
 .scroll-indicator {
   display: flex;
   flex-direction: column;
@@ -518,20 +527,25 @@ body {
 }
 
 @keyframes bounceDown {
-  0%, 20%, 50%, 80%, 100% {
+
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
     transform: translateY(0);
   }
+
   40% {
     transform: translateY(8px);
   }
+
   60% {
     transform: translateY(4px);
   }
 }
 
-/* ==========================================================================
-   REGLA PRINCIPAL: TARJETAS DE IMAGEN CON EFECTO BLANCO Y NEGRO -> COLOR HOVER
-   ========================================================================== */
+
 .image-card {
   position: relative;
   border-radius: var(--radius-lg);
@@ -576,7 +590,7 @@ body {
   box-shadow: none !important;
 }
 
-/* Muestra Clonada: Sin blanco y negro (color completo), sin animaciones y sin brillo (glow) */
+
 .muestra-clonada-img-card,
 .muestra-clonada-img-card:hover,
 .muestra-clonada-img-card .interactive-img,
@@ -618,7 +632,7 @@ body {
   background: #030712;
 }
 
-/* TODAS LAS IMÁGENES EN COLOR PERMANENTE Y SIN ANIMACIÓN */
+
 .interactive-img,
 .img-wrapper img,
 .image-card img {
@@ -670,9 +684,7 @@ body {
 }
 
 
-/* ==========================================================================
-   SECCIONES Y CONTENIDOS NÚCLEO
-   ========================================================================== */
+
 .nucleo-section {
   display: flex;
   flex-direction: column;
@@ -731,9 +743,7 @@ body {
 }
 
 
-/* ==========================================================================
-   TARJETA INTERACTIVA DE AUDIO Y QUIZ
-   ========================================================================== */
+
 .audio-card-box {
   background: var(--bg-card);
   backdrop-filter: blur(16px);
@@ -855,6 +865,7 @@ body {
     opacity: 0;
     transform: translateY(-8px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -877,9 +888,7 @@ body {
   height: 72px;
 }
 
-/* ==========================================================================
-   FOOTER: FUENTES DE INFORMACIÓN
-   ========================================================================== */
+
 .fuentes-box {
   background: var(--bg-card);
   backdrop-filter: blur(16px);
@@ -921,9 +930,7 @@ body {
 }
 
 
-/* ==========================================================================
-   NUCLEOS LAUNCHPAD (MAIN PAGE CARDS)
-   ========================================================================== */
+
 .nucleos-launchpad {
   margin-top: 1rem;
 }
@@ -1129,9 +1136,7 @@ body {
 }
 
 
-/* ==========================================================================
-   SYSTEM MODAL OVERLAY
-   ========================================================================== */
+
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -1220,9 +1225,6 @@ body {
 }
 
 
-/* ==========================================================================
-   TEST "LLAMADA DE PRUEBA" (DENTRO DEL NÚCLEO 1)
-   ========================================================================== */
 .test-call-wrapper {
   background: rgba(15, 23, 42, 0.75);
   border: 1px solid rgba(168, 85, 247, 0.25);
@@ -1431,7 +1433,7 @@ body {
   color: #fda4af;
 }
 
-/* ESTADÍSTICAS Y PROMEDIOS */
+
 .stats-comparison-box {
   background: rgba(13, 20, 36, 0.9);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1461,9 +1463,7 @@ body {
   box-shadow: 0 0 20px rgba(192, 38, 211, 0.35);
 }
 
-/* ==========================================================================
-   HERRAMIENTA INTERACTIVA: ARMÁ TU PROPIA ESTAFA (NÚCLEO 2)
-   ========================================================================== */
+
 .scam-builder-wrapper {
   background: rgba(15, 23, 42, 0.8);
   border: 1.5px solid rgba(244, 63, 94, 0.4);
@@ -1690,7 +1690,7 @@ body {
   box-shadow: 0 10px 30px rgba(192, 38, 211, 0.7), 0 0 25px rgba(56, 189, 248, 0.6);
 }
 
-/* RESULTADOS: PANEL & AUDIO PLAYER */
+
 .scam-results-panel {
   margin-top: 2rem;
   border-top: 1px solid var(--border-color);
@@ -1746,7 +1746,7 @@ body {
   box-shadow: 0 6px 22px rgba(0, 242, 254, 0.6);
 }
 
-/* RESULTADOS DE IMPACTO ACÚSTICO (SOLO PORCENTAJE CENTRADO) */
+
 .pie-chart-interactive-section {
   background: rgba(15, 23, 42, 0.9);
   border: 1px solid var(--border-color);
@@ -1802,7 +1802,7 @@ body {
   line-height: 1.35;
 }
 
-/* TOOLTIP FLOTANTE EN HOVER SOBRE LA TORTA */
+
 .pie-tooltip {
   position: absolute;
   top: -80px;
@@ -1849,7 +1849,7 @@ body {
   line-height: 1.35;
 }
 
-/* LEYENDA DEL GRÁFICO DE TORTA */
+
 .pie-legend {
   display: flex;
   flex-direction: column;
@@ -1905,9 +1905,7 @@ body {
 }
 
 
-/* ==========================================================================
-   RESPONSIVE DESIGN
-   ========================================================================== */
+
 @media (max-width: 900px) {
   .hero-screen {
     min-height: auto;
@@ -1948,9 +1946,7 @@ body {
   }
 }
 
-/* ==========================================================================
-   MUESTRA CLONADA E INGENIERÍA SOCIAL (EXACT MATCH FOR SCREENSHOT)
-   ========================================================================== */
+
 .muestra-clonada-badge {
   display: inline-block;
   padding: 0.55rem 2.2rem;
@@ -2142,9 +2138,7 @@ body {
   height: auto;
 }
 
-/* ==========================================================================
-   REGLA DE BORDEADO NEÓN DEGRADADO AL PASAR EL MOUSE (HOVER ONLY)
-   ========================================================================== */
+
 .nucleo-card-launcher,
 .scam-builder-wrapper,
 .stats-comparison-box {
@@ -2163,7 +2157,7 @@ body {
   transform: none !important;
 }
 
-/* CAJA DE TEXTO INTRODUCTORIA E IMAGEN DEL HERO - BORDE IZQUIERDO AZUL/CIAN FIJO SIN GLOW */
+
 .intro-text-box,
 .intro-text-box:hover {
   background: rgba(15, 23, 42, 0.7) !important;
@@ -2183,7 +2177,7 @@ body {
   transform: none !important;
 }
 
-/* MUESTRA CLONADA E INGENIERÍA SOCIAL - FIJO SIN BRILLO DE BORDE NI GLOW */
+
 .middle-feature-box,
 .middle-feature-box:hover {
   background: rgba(15, 23, 42, 0.75) !important;
@@ -2197,7 +2191,7 @@ body {
   box-shadow: none !important;
 }
 
-/* SIMULADOR DE DETECCIÓN ACÚSTICA - BORDE VIOLETA PERMANENTE Y ESTÉTIKA DE FOTO */
+
 .test-call-wrapper {
   background: rgba(10, 16, 28, 0.95) !important;
   border: 2px solid #8b5cf6 !important;
@@ -2268,13 +2262,13 @@ body {
   transform: translateY(-2px);
 }
 
-/* Ocultar cartel de insignias de módulos en los núcleos */
+
 .launcher-badge,
 .tag-badge {
   display: none !important;
 }
 
-/* Display Interactivo del Hacker y Expresiones (Simulador Núcleo 2) */
+
 .scam-avatar-display-box {
   grid-column: span 2;
   grid-row: span 2;
@@ -2372,7 +2366,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 .bubble-icon-inner .symbol-text {
@@ -2383,9 +2377,7 @@ body {
   line-height: 1;
 }
 
-/* ==========================================================================
-   ELIMINACIÓN TOTAL DE BRILLOS (GLOW / SHINE / BOX-SHADOW / TEXT-SHADOW)
-   ========================================================================== */
+
 .hero-title-capsule,
 .hero-title-capsule:hover,
 .hero-subtitle-capsule,
@@ -2432,10 +2424,7 @@ body {
   filter: grayscale(0%) opacity(1) !important;
 }
 
-/* ==========================================================================
-   ANIMACIÓN EXCLUSIVA PARA LAS 2 IMÁGENES DE PORTADA DE LOS NÚCLEOS
-   (BLANCO Y NEGRO -> COLOR CON EFECTO ZOOM EN HOVER)
-   ========================================================================== */
+
 .nucleo-card-launcher .launcher-img-preview img {
   filter: grayscale(100%) opacity(0.85) !important;
   transform: scale(1) !important;
