@@ -331,7 +331,7 @@ body {
   justify-content: center;
   background: linear-gradient(135deg, #701a40 0%, #881337 50%, #500724 100%);
   border: 1.5px solid rgba(244, 63, 94, 0.4);
-  box-shadow: 0 10px 30px rgba(136, 19, 55, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  box-shadow: none !important;
   border-radius: 60px;
   padding: 1.1rem 3.5rem;
   transition: none;
@@ -339,7 +339,7 @@ body {
 
 .hero-title-capsule:hover {
   transform: none;
-  box-shadow: 0 10px 30px rgba(136, 19, 55, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  box-shadow: none !important;
 }
 
 .hero-title {
@@ -351,7 +351,7 @@ body {
   letter-spacing: 1.2px;
   margin: 0;
   line-height: 1.15;
-  text-shadow: none;
+  text-shadow: none !important;
 }
 
 .hero-subtitle-capsule {
@@ -360,11 +360,15 @@ body {
   justify-content: center;
   background: rgba(60, 20, 42, 0.65);
   border: 1px solid rgba(244, 63, 94, 0.3);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: none !important;
   border-radius: 50px;
   padding: 0.85rem 2.5rem;
   max-width: 860px;
   backdrop-filter: blur(12px);
+}
+
+.hero-subtitle-capsule:hover {
+  box-shadow: none !important;
 }
 
 .hero-subtitle {
@@ -402,9 +406,9 @@ body {
 
 .red-tag .tag-badge,
 .tag-badge.red-badge {
-  background: #dc2626;
+  background: #f43f5e;
   color: #ffffff;
-  border: 1px solid #ef4444;
+  border: 1px solid #fb7185;
 }
 
 .modal-category-tag .tag-label {
@@ -428,9 +432,9 @@ body {
 }
 
 .section-tag-pill.alert-red {
-  color: #f87171;
-  background: rgba(239, 68, 68, 0.15);
-  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #fb7185;
+  background: rgba(244, 63, 94, 0.15);
+  border: 1px solid rgba(244, 63, 94, 0.35);
 }
 
 .section-tag-pill.alert-cyan {
@@ -552,13 +556,14 @@ body {
 
 .hero-image-card {
   border-color: rgba(56, 189, 248, 0.45) !important;
-  box-shadow: 0 0 25px rgba(56, 189, 248, 0.2), var(--shadow-card) !important;
+  box-shadow: none !important;
 }
 
 .hero-title-capsule,
 .hero-title-capsule:hover {
   transform: none !important;
   transition: none !important;
+  box-shadow: none !important;
 }
 
 .hero-image-card,
@@ -568,9 +573,10 @@ body {
   filter: grayscale(0%) opacity(1) !important;
   transform: none !important;
   transition: none !important;
+  box-shadow: none !important;
 }
 
-/* Muestra Clonada: Sin blanco y negro (color completo) y sin animaciones */
+/* Muestra Clonada: Sin blanco y negro (color completo), sin animaciones y sin brillo (glow) */
 .muestra-clonada-img-card,
 .muestra-clonada-img-card:hover,
 .muestra-clonada-img-card .interactive-img,
@@ -578,6 +584,7 @@ body {
   filter: grayscale(0%) opacity(1) !important;
   transform: none !important;
   transition: none !important;
+  box-shadow: none !important;
 }
 
 .hero-image-card .caption-subtitle {
@@ -591,7 +598,7 @@ body {
 
 .image-card.magenta-card:hover {
   border-color: var(--magenta-neon);
-  box-shadow: var(--shadow-glow-magenta), var(--shadow-card);
+  box-shadow: none !important;
 }
 
 .image-card.amber-card {
@@ -600,7 +607,7 @@ body {
 
 .image-card.amber-card:hover {
   border-color: var(--amber-neon);
-  box-shadow: 0 0 25px rgba(245, 158, 11, 0.3), var(--shadow-card);
+  box-shadow: none !important;
 }
 
 .img-wrapper {
@@ -611,22 +618,25 @@ body {
   background: #030712;
 }
 
-/* IMÁGENES EN BLANCO Y NEGRO POR DEFECTO, COLOR AL PASAR EL MOUSE */
+/* TODAS LAS IMÁGENES EN COLOR PERMANENTE Y SIN ANIMACIÓN */
 .interactive-img,
-.img-wrapper img {
+.img-wrapper img,
+.image-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: grayscale(100%) opacity(0.9);
-  transition: filter 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: grayscale(0%) opacity(1) !important;
+  transform: none !important;
+  transition: none !important;
 }
 
 .image-card:hover .interactive-img,
 .image-card:hover img,
 .interactive-img:hover {
-  filter: grayscale(0%) opacity(1);
-  transform: scale(1.06);
+  filter: grayscale(0%) opacity(1) !important;
+  transform: none !important;
+  transition: none !important;
 }
 
 .caption-content {
@@ -1416,9 +1426,9 @@ body {
 }
 
 .feedback-wrong {
-  background: rgba(239, 68, 68, 0.15);
-  border: 1px solid #ef4444;
-  color: #fca5a5;
+  background: rgba(244, 63, 94, 0.15);
+  border: 1px solid #f43f5e;
+  color: #fda4af;
 }
 
 /* ESTADÍSTICAS Y PROMEDIOS */
@@ -1456,7 +1466,7 @@ body {
    ========================================================================== */
 .scam-builder-wrapper {
   background: rgba(15, 23, 42, 0.8);
-  border: 1.5px solid rgba(225, 29, 72, 0.4);
+  border: 1.5px solid rgba(244, 63, 94, 0.4);
   border-radius: 24px;
   padding: 2.2rem;
   box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4), var(--shadow-glow-magenta);
@@ -1961,7 +1971,7 @@ body {
   border-radius: 14px !important;
   background: rgba(13, 20, 36, 0.95) !important;
   padding: 1.8rem !important;
-  box-shadow: 0 0 25px rgba(0, 242, 254, 0.15) !important;
+  box-shadow: none !important;
 }
 
 .btn-play-cyan {
@@ -2115,7 +2125,7 @@ body {
   border-radius: 14px !important;
   background: rgba(13, 20, 36, 0.95) !important;
   padding: 1.6rem !important;
-  box-shadow: 0 0 25px rgba(16, 185, 129, 0.12) !important;
+  box-shadow: none !important;
 }
 
 .robot-graphic-container {
@@ -2136,8 +2146,6 @@ body {
    REGLA DE BORDEADO NEÓN DEGRADADO AL PASAR EL MOUSE (HOVER ONLY)
    ========================================================================== */
 .nucleo-card-launcher,
-.intro-text-box,
-.middle-feature-box,
 .scam-builder-wrapper,
 .stats-comparison-box {
   background: rgba(12, 17, 30, 0.85) !important;
@@ -2148,13 +2156,45 @@ body {
 }
 
 .nucleo-card-launcher:hover,
-.intro-text-box:hover,
-.middle-feature-box:hover,
 .scam-builder-wrapper:hover,
 .stats-comparison-box:hover {
   border-color: #f43f5e !important;
   box-shadow: 0 0 22px rgba(244, 63, 94, 0.75), 0 0 45px rgba(244, 63, 94, 0.35), var(--shadow-card) !important;
-  transform: translateY(-4px) !important;
+  transform: none !important;
+}
+
+/* CAJA DE TEXTO INTRODUCTORIA E IMAGEN DEL HERO - BORDE IZQUIERDO AZUL/CIAN FIJO SIN GLOW */
+.intro-text-box,
+.intro-text-box:hover {
+  background: rgba(15, 23, 42, 0.7) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-left: 5px solid #00f2fe !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.hero-image-card,
+.hero-image-card:hover {
+  background: rgba(15, 23, 42, 0.7) !important;
+  border: 1px solid rgba(0, 242, 254, 0.3) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* MUESTRA CLONADA E INGENIERÍA SOCIAL - FIJO SIN BRILLO DE BORDE NI GLOW */
+.middle-feature-box,
+.middle-feature-box:hover {
+  background: rgba(15, 23, 42, 0.75) !important;
+  border: 1px solid rgba(56, 189, 248, 0.2) !important;
+  border-radius: 28px !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.muestra-clonada-badge {
+  box-shadow: none !important;
 }
 
 /* SIMULADOR DE DETECCIÓN ACÚSTICA - BORDE VIOLETA PERMANENTE Y ESTÉTIKA DE FOTO */
@@ -2169,7 +2209,7 @@ body {
 .test-call-wrapper:hover {
   border-color: #a855f7 !important;
   box-shadow: 0 0 35px rgba(168, 85, 247, 0.6), var(--shadow-card) !important;
-  transform: translateY(-2px) !important;
+  transform: none !important;
 }
 
 .launcher-body {
@@ -2341,4 +2381,68 @@ body {
   font-size: 1.8rem;
   color: #111827;
   line-height: 1;
+}
+
+/* ==========================================================================
+   ELIMINACIÓN TOTAL DE BRILLOS (GLOW / SHINE / BOX-SHADOW / TEXT-SHADOW)
+   ========================================================================== */
+.hero-title-capsule,
+.hero-title-capsule:hover,
+.hero-subtitle-capsule,
+.hero-subtitle-capsule:hover,
+.hero-title,
+.hero-subtitle,
+.hero-image-card,
+.hero-image-card:hover,
+.intro-text-box,
+.intro-text-box:hover,
+.middle-feature-box,
+.middle-feature-box:hover,
+.muestra-clonada-badge,
+.cyan-border-card,
+.cyan-border-card:hover,
+.emerald-border-card,
+.emerald-border-card:hover,
+.muestra-clonada-img-card,
+.muestra-clonada-img-card:hover,
+#modalNucleo1 .image-card,
+#modalNucleo1 .image-card:hover,
+#modalNucleo1 .magenta-card,
+#modalNucleo1 .magenta-card:hover,
+#modalNucleo1 .amber-card,
+#modalNucleo1 .amber-card:hover,
+#modalNucleo1 .text-block-box,
+#modalNucleo1 .text-block-box:hover,
+#modalNucleo1 .simulador-tag-pill,
+#modalNucleo1 .btn-play-sample,
+#modalNucleo1 .btn-play-sample:hover,
+#modalNucleo1 .btn-choice,
+#modalNucleo1 .btn-choice:hover,
+#modalNucleo1 .btn-choice.selected-ia,
+#modalNucleo1 .btn-choice.selected-humana {
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+
+#modalNucleo1 .interactive-img,
+#modalNucleo1 .img-wrapper img,
+.hero-image-card img,
+.muestra-clonada-img-card img {
+  filter: grayscale(0%) opacity(1) !important;
+}
+
+/* ==========================================================================
+   ANIMACIÓN EXCLUSIVA PARA LAS 2 IMÁGENES DE PORTADA DE LOS NÚCLEOS
+   (BLANCO Y NEGRO -> COLOR CON EFECTO ZOOM EN HOVER)
+   ========================================================================== */
+.nucleo-card-launcher .launcher-img-preview img {
+  filter: grayscale(100%) opacity(0.85) !important;
+  transform: scale(1) !important;
+  transition: filter 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.nucleo-card-launcher:hover .launcher-img-preview img {
+  filter: grayscale(0%) opacity(1) !important;
+  transform: scale(1.1) !important;
 }
