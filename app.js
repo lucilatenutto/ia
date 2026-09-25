@@ -361,11 +361,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 1. GÉNERO -> Cambiar el avatar del muñeco hacker
     if (scamParams.genero === 'masculino') {
-      imgHackerMain.src = 'imgs/hacker2.png';
+      imgHackerMain.src = 'imgs/hacker2.png'; // Azul (Masculino)
     } else if (scamParams.genero === 'femenino') {
-      imgHackerMain.src = 'imgs/hacker3.png';
+      imgHackerMain.src = 'imgs/hacker1.png'; // Violeta (Femenino)
     } else {
-      imgHackerMain.src = 'imgs/hacker1.png';
+      imgHackerMain.src = 'imgs/hacker3.png'; // Gris (Estado Inicial)
     }
 
     // 2. NACIONALIDAD -> Iconito DENTRO de la burbuja de diálogo izquierda
@@ -393,26 +393,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Manejador de selección de botones de parámetros
+  // Manejador de selección de botones de parámetros (con opción de deseleccionar)
   document.querySelectorAll('.param-options').forEach(group => {
     const paramName = group.getAttribute('data-param');
     const btns = group.querySelectorAll('.param-btn');
 
     btns.forEach(btn => {
       btn.addEventListener('click', () => {
-        btns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
         const val = btn.getAttribute('data-val');
-        scamParams[paramName] = val;
+        const isAlreadyActive = btn.classList.contains('active');
+
+        btns.forEach(b => b.classList.remove('active'));
+
+        if (isAlreadyActive) {
+          // Deseleccionar al hacer clic de nuevo (vuelve a estado neutral 'ninguno')
+          scamParams[paramName] = 'ninguno';
+        } else {
+          btn.classList.add('active');
+          scamParams[paramName] = val;
+        }
 
         // Si se cambia el botón de emoción, sincronizar slider de velocidad
         if (paramName === 'emocion') {
           const scamSpeedRange = document.getElementById('scamSpeedRange');
           const speedValLabel = document.getElementById('speedValLabel');
           let targetSpeed = 1.0;
-          if (val === 'lento') targetSpeed = 0.7;
-          else if (val === 'normal') targetSpeed = 1.0;
-          else if (val === 'rapido') targetSpeed = 1.4;
+          if (scamParams.emocion === 'lento') targetSpeed = 0.7;
+          else if (scamParams.emocion === 'normal') targetSpeed = 1.0;
+          else if (scamParams.emocion === 'rapido') targetSpeed = 1.4;
 
           scamParams.velocidad = targetSpeed;
           if (scamSpeedRange) scamSpeedRange.value = targetSpeed;
@@ -426,9 +434,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         updateHackerAvatarVisuals();
+        updateScamFallPercentage();
       });
     });
   });
+
+  // Inicializar estado visual del hacker al cargar la página
+  updateHackerAvatarVisuals();
 
   // Manejador del slider de velocidad en tiempo real con aceleración de audio
   const scamSpeedRange = document.getElementById('scamSpeedRange');
